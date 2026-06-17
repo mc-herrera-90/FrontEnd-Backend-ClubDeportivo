@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        border: 1px solid red;
+        width: 100%;
+    }
+    thead {
+        background-color: aqua;
+    }
+</style>
+<body>
+    
+    <h2>Lista de usuarios</h2>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+    <script>
+        const token = localStorage.getItem('token');
+
+        fetch('http://localhost:3000/api/users', {
+            method: 'get',
+            headers: {
+             Authorization: `Bearer ${token}`
+            }
+        })
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            const tbody = document.getElementById('tbody');
+
+            datos.data.forEach(usuario => {
+                tbody.innerHTML += /*html*/ `
+                    <tr>
+                        <th>${usuario.id}</th>
+                        <th>${usuario.full_name}</th>
+                        <th>${usuario.role}</th>
+                    </tr>
+                ` 
+            });
+            console.log(datos.data)
+        })
+        .catch(error => console.error(error))
+    </script>
+</body>
+
+</html>
