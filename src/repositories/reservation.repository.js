@@ -39,7 +39,7 @@ async function findAll(filters = {}) {
                             {
                                 model: User,
                                 as: "coach",
-                                attributes: ["id", "email", "role"]
+                                attributes: ["id", "full_name", "email", "role"]
                             }
                         ]
                     }
@@ -66,7 +66,7 @@ async function findById(id) {
                             {
                                 model: User,
                                 as: "coach",
-                                attributes: ["id", "email", "role"]
+                                attributes: ["id", "full_name", "email", "role"]
                             }
                         ]
                     }
